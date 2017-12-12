@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="test2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainMenuController">
+   <children>
+      <Button layoutX="608.0" layoutY="385.0" mnemonicParsing="false" text="Order" />
+      <Button layoutX="605.0" layoutY="542.0" mnemonicParsing="false" text="Report" />
+      <Button layoutX="262.0" layoutY="542.0" mnemonicParsing="false" text="Add Item" />
+      <Button layoutX="937.0" layoutY="542.0" mnemonicParsing="false" text="Setting" />
+      <Label layoutX="423.0" layoutY="138.0" text="Restaurant Order System" textAlignment="CENTER">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
