@@ -2,13 +2,13 @@ package sample;
 
 public class FoodListItem {
     private String name;
-    private String shortName;
-    private int number;
+    private int quantity;
+    private double subtotal;
 
-    public FoodListItem(String name, String shortName, int number){
+    public FoodListItem(String name, int quantity, double subtotal){
         this.name = name;
-        this.shortName = shortName;
-        this.number = number;
+        this.quantity = quantity;
+        this.subtotal = subtotal;
     }
 
     public void setName(String name){
@@ -19,19 +19,19 @@ public class FoodListItem {
         return name;
     }
 
-    public void setShortName(String shortName){
-        this.shortName = shortName;
+    public void setQuantity(int quantity){
+        this.quantity = quantity;
     }
 
-    public String getShortName(){
-        return shortName;
+    public int getQuantity(){
+        return quantity;
     }
 
-    public void setNumber(int number){
-        this.number = number;
+    public void setSubtotal(double subtotal){
+        this.subtotal = subtotal;
     }
 
-    public int getNumber(){
-        return number;
+    public double getSubtotal(){
+        return subtotal;
     }
 }

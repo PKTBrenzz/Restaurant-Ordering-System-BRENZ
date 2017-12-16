@@ -1,5 +1,8 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,15 +11,17 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,30 +32,37 @@ public class Controller implements Initializable{
     @FXML
     FlowPane flowtest;
     @FXML
-    TableView<FoodListItem> itemlist;
+    TableView<FoodListItem> itemtable;
     @FXML
     TableColumn item_column;
     @FXML
-    TableColumn no_column;
+    TableColumn qty_column;
     @FXML
-    VBox categorylist;
+    TableColumn subtotal_column;
+    @FXML
+    VBox filterlist;
+    @FXML
+    TextField totalfield;
     @FXML
     Button deletebutton;
+    @FXML
+    Button checkoutButton;
     @FXML
     Button test;
 
 
     List<FoodItem> foods = new ArrayList<FoodItem>();
-    List<FoodListItem> list = new ArrayList<FoodListItem>();
+    ObservableList<FoodListItem> list = FXCollections.observableArrayList();
 
 
     public void deleteTableItem(){
-        FoodListItem deleteItem = itemlist.getSelectionModel().getSelectedItem();
-        itemlist.getItems().remove(deleteItem);
+        FoodListItem deleteItem = itemtable.getSelectionModel().getSelectedItem();
+        itemtable.getItems().remove(deleteItem);
+        setTotal();
     }
 
 
-    public void testpress(javafx.event.ActionEvent event) throws IOException {
+    public void testpress(ActionEvent event) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("main_menu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource() ).getScene().getWindow();
@@ -64,13 +76,15 @@ public class Controller implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         item_column.setCellValueFactory(new PropertyValueFactory<FoodListItem, String>("name"));
-        no_column.setCellValueFactory(new PropertyValueFactory<FoodListItem, Integer>("number"));
+        qty_column.setCellValueFactory(new PropertyValueFactory<FoodListItem, Integer>("quantity"));
+        subtotal_column.setCellValueFactory(new PropertyValueFactory<FoodListItem, Double>("subtotal"));
 
-        Button allB = new Button("ALL");
-        allB.setPrefSize(200,75);
-        allB.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
+        foodItemInput();
+
+        Button filterAll = new Button("ALL");
+        filterAll.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(javafx.event.ActionEvent event) {
+            public void handle(ActionEvent event) {
                 flowtest.getChildren().clear();
                 for(FoodItem i : foods){
                     Button button = new Button(i.getName());
@@ -78,45 +92,71 @@ public class Controller implements Initializable{
                     button.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
                         @Override
                         public void handle(javafx.event.ActionEvent event) {
-                            FoodListItem temp = new FoodListItem(i.getName(),i.getShortName(),1);
-                            itemlist.getItems().add(temp);
+                            ObservableList<FoodListItem> templist = itemtable.getItems();
+                            boolean found = false;
+                            for(FoodListItem j : templist){
+                                if(j.getName() == i.getName()){
+                                    found = true;
+                                    j.setQuantity(j.getQuantity()+1);
+                                    j.setSubtotal(j.getSubtotal()+i.getPrice());
+                                    itemtable.refresh();
+                                }
+                            }
+                            if(!found) {
+                                FoodListItem temp = new FoodListItem(i.getName(), 1, i.getPrice());
+                                itemtable.getItems().add(temp);
+                            }
+                            setTotal();
                         }
                     });
                     flowtest.getChildren().add(button);
                 }
             }
         });
-        Button abcB = new Button("abc");
-        abcB.setPrefSize(200,75);
-        abcB.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
+        filterlist.getChildren().add(filterAll);
+
+        Button filterFood = new Button("Food");
+        filterFood.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(javafx.event.ActionEvent event) {
+            public void handle(ActionEvent event) {
+                List<String> filter = new ArrayList<String>();
+                filter.add("Burger");
+                filter.add("Rice");
+
                 flowtest.getChildren().clear();
                 for(FoodItem i : foods){
-                    if(i.getName() == abcB.getText()) {
+                    if(filter.contains(i.getName())) {
                         Button button = new Button(i.getName());
                         button.setPrefSize(100, 100);
                         button.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
                             @Override
                             public void handle(javafx.event.ActionEvent event) {
-                                FoodListItem temp = new FoodListItem(i.getName(), i.getShortName(), 1);
-                                itemlist.getItems().add(temp);
+                                ObservableList<FoodListItem> templist = itemtable.getItems();
+                                boolean found = false;
+                                for (FoodListItem j : templist) {
+                                    if (j.getName() == i.getName()) {
+                                        found = true;
+                                        j.setQuantity(j.getQuantity() + 1);
+                                        j.setSubtotal(j.getSubtotal() + i.getPrice());
+                                        itemtable.refresh();
+                                    }
+                                }
+                                if (!found) {
+                                    FoodListItem temp = new FoodListItem(i.getName(), 1, i.getPrice());
+                                    itemtable.getItems().add(temp);
+                                }
+                                setTotal();
                             }
                         });
                         flowtest.getChildren().add(button);
                     }
                 }
+
             }
         });
-        categorylist.getChildren().add(allB);
-        categorylist.getChildren().add(abcB);
+        filterlist.getChildren().add(filterFood);
 
 
-
-        foods.add(new FoodItem("1","abc","abc",10.00, "big"));
-        foods.add(new FoodItem("2","def","def",5.00, "big"));
-        foods.add(new FoodItem("3","ghi","ghi",7.00, "big"));
-        foods.add(new FoodItem("4","jkl","jkl",12.00, "big"));
 
         for(FoodItem i : foods){
             Button button = new Button(i.getName());
@@ -124,11 +164,49 @@ public class Controller implements Initializable{
             button.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
                 @Override
                 public void handle(javafx.event.ActionEvent event) {
-                    FoodListItem temp = new FoodListItem(i.getName(),i.getShortName(),1);
-                    itemlist.getItems().add(temp);
+                    ObservableList<FoodListItem> templist = itemtable.getItems();
+                    boolean found = false;
+                    for(FoodListItem j : templist){
+                        if(j.getName() == i.getName()){
+                            found = true;
+                            j.setQuantity(j.getQuantity()+1);
+                            j.setSubtotal(j.getSubtotal()+i.getPrice());
+                            itemtable.refresh();
+                        }
+                    }
+                    if(!found) {
+                        FoodListItem temp = new FoodListItem(i.getName(), 1, i.getPrice());
+                        itemtable.getItems().add(temp);
+                    }
+                    setTotal();
                 }
             });
             flowtest.getChildren().add(button);
+        }
+    }
+
+    public void setTotal(){
+        ObservableList<FoodListItem> templist = itemtable.getItems();
+        double total = 0;
+        for(FoodListItem i : templist){
+            total += i.getSubtotal();
+        }
+        totalfield.setText(new Double(total).toString());
+    }
+
+    public void foodItemInput(){
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFiles/foodList.txt"));
+            String line = null;
+            while((line = bufferedReader.readLine())!= null){
+                String[] data = line.split(",");
+                foods.add(new FoodItem(data[0], data[1],  Double.parseDouble(data[2])));
+            }
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
