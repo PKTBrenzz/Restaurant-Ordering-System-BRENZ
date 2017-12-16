@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FilterAddController">
+   <children>
+      <Label layoutX="114.0" layoutY="99.0" text="Filter name:" />
+      <TextField fx:id="filterName" layoutX="240.0" layoutY="94.0" />
+      <ListView fx:id="newListFilter" layoutX="52.0" layoutY="194.0" prefHeight="124.0" prefWidth="200.0" />
+      <ListView fx:id="allListFilter" layoutX="346.0" layoutY="194.0" prefHeight="124.0" prefWidth="200.0" />
+      <Label layoutX="268.0" layoutY="36.0" text="Add Filter" />
+      <Button layoutX="257.0" layoutY="404.0" mnemonicParsing="false" onAction="#addFilter" text="COMFIRM" />
+      <Button layoutX="74.0" layoutY="339.0" mnemonicParsing="false" onAction="#deleteFilterFood" text="Delete selected food" />
+      <Button layoutX="362.0" layoutY="339.0" mnemonicParsing="false" onAction="#addFilterFood" text="Add Food to new filter" />
+      <Label layoutX="91.0" layoutY="166.0" text="Food for new filter" textAlignment="CENTER" />
+      <Label layoutX="405.0" layoutY="166.0" text="All Food LIst" />
+   </children>
+</AnchorPane>

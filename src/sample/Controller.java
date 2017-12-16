@@ -184,6 +184,7 @@ public class Controller implements Initializable{
                     }
                 }
             });
+            filterlist.getChildren().add(filterButton);
         }
 
 
@@ -234,6 +235,7 @@ public class Controller implements Initializable{
             while((line = bufferedReader.readLine())!= null){
                 filter.add(line);
             }
+            bufferedReader.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -249,6 +251,7 @@ public class Controller implements Initializable{
             while((line = bufferedReader.readLine())!= null){
                 filters.add(line);
             }
+            bufferedReader.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

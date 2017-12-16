@@ -1,8 +1,11 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
@@ -31,12 +34,13 @@ public class AddItemController implements Initializable {
     }
 
     public void clear() {
+        idfield.clear();
         field1.clear();
         field2.clear();
         filterlistview.getItems().clear();
     }
 
-    public void save() throws IOException {
+    public void save(ActionEvent event) throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Dialog");
@@ -49,7 +53,14 @@ public class AddItemController implements Initializable {
                 fw = new FileWriter("dataFiles/foodList.txt",true);
                 fw.write(idfield.getText() + "," +field1.getText() + "," + field2.getText() + "\n");
 
+                for(String i : filterlistview.getItems()){
+                    FileWriter ffw = new FileWriter("filterList/" + i + ".txt", true);
+                    ffw.write(field1.getText() + "\n");
+                    ffw.close();
+                }
 
+                Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                stage.close();
             }
             catch (IOException ex)
             {

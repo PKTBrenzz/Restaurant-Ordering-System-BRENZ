@@ -24,17 +24,19 @@ public class MainMenuController {
         stage.show();
     }
 
-    public void startReport(){
-
+    public void startReport() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("filter_add.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     public void startAddItem(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("add_item.fxml"));
-        Parent root = (Parent) loader.load();
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        Scene scene = new Scene(loader.load());
         stage.setScene(scene);
-        stage.show();
-
+        stage.showAndWait();
     }
 }
