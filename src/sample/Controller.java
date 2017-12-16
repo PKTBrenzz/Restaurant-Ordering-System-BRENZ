@@ -41,6 +41,8 @@ public class Controller implements Initializable{
     @FXML
     TextField totalfield;
     @FXML
+    TextField cashAmount;
+    @FXML
     Button deletebutton;
     @FXML
     Button checkoutButton;
@@ -49,9 +51,10 @@ public class Controller implements Initializable{
     @FXML
     Label tableNumber;
     @FXML
-            Label errorlabel;
+    Label errorlabel;
 
     List<FoodItem> foods = new ArrayList<FoodItem>();
+    List<String> filters = new ArrayList<String>();
     ObservableList<FoodListItem> list = FXCollections.observableArrayList();
 
 
@@ -62,30 +65,27 @@ public class Controller implements Initializable{
     }
 
     public void checkOutExecute(){
-        try {
-            boolean comfirm = false;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("summary.fxml"));
-            Stage stage = new Stage();
-            Scene scene = new Scene(loader.load(), 350, 600);
-            Summary summary = loader.getController();
-            summary.setSummarytext(itemtable.getItems());
-            stage.setTitle("Summary");
-            stage.setScene(scene);
-            stage.showAndWait();
-            comfirm = summary.getComfirmation();
-            if(comfirm){
-                errorlabel.setText("true");
-                Date date = new Date();
-
-                OrderItem newOrder = new OrderItem(1,1, date,5);
-
-                FileOutputStream fos = new FileOutputStream("OrderHistory/currentOrder.txt");
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(newOrder);
-                oos.close();
+        if(Double.parseDouble(totalfield.getText()) > Double.parseDouble(cashAmount.getText())){
+            errorlabel.setText("ERROR!!! Cash inserted is not enough!");
+        }
+        else {
+            try {
+                boolean comfirm = false;
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("summary.fxml"));
+                Stage stage = new Stage();
+                Scene scene = new Scene(loader.load(), 350, 600);
+                Summary summary = loader.getController();
+                summary.setSummarytext(itemtable.getItems());
+                stage.setTitle("Summary");
+                stage.setScene(scene);
+                stage.showAndWait();
+                comfirm = summary.getComfirmation();
+                if (comfirm) {
+                    errorlabel.setText("true");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }
@@ -109,8 +109,10 @@ public class Controller implements Initializable{
         subtotal_column.setCellValueFactory(new PropertyValueFactory<FoodListItem, Double>("subtotal"));
 
         foodItemInput();
+        getFilterInput();
 
         Button filterAll = new Button("ALL");
+        filterAll.setPrefSize(150,60);
         filterAll.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -144,44 +146,48 @@ public class Controller implements Initializable{
         });
         filterlist.getChildren().add(filterAll);
 
-        Button filterFood = new Button("Food");
-        filterFood.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                List<String> filter = getFilterList(filterFood.getText());
+        for(String i : filters){
+            Button filterButton = new Button(i);
+            filterButton.setPrefSize(150,60);
+            filterButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    List<String> filteredFoods = getFilterList(i);
 
-                flowtest.getChildren().clear();
-                for(FoodItem i : foods){
-                    if(filter.contains(i.getName())) {
-                        Button button = new Button(i.getName());
-                        button.setPrefSize(100, 100);
-                        button.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
-                            @Override
-                            public void handle(javafx.event.ActionEvent event) {
-                                ObservableList<FoodListItem> templist = itemtable.getItems();
-                                boolean found = false;
-                                for (FoodListItem j : templist) {
-                                    if (j.getName() == i.getName()) {
-                                        found = true;
-                                        j.setQuantity(j.getQuantity() + 1);
-                                        j.setSubtotal(j.getSubtotal() + i.getPrice());
-                                        itemtable.refresh();
+                    flowtest.getChildren().clear();
+                    for(FoodItem i : foods){
+                        if(filteredFoods.contains(i.getName())) {
+                            Button button = new Button(i.getName());
+                            button.setPrefSize(100, 100);
+                            button.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
+                                @Override
+                                public void handle(javafx.event.ActionEvent event) {
+                                    ObservableList<FoodListItem> templist = itemtable.getItems();
+                                    boolean found = false;
+                                    for (FoodListItem j : templist) {
+                                        if (j.getName() == i.getName()) {
+                                            found = true;
+                                            j.setQuantity(j.getQuantity() + 1);
+                                            j.setSubtotal(j.getSubtotal() + i.getPrice());
+                                            itemtable.refresh();
+                                        }
                                     }
+                                    if (!found) {
+                                        FoodListItem temp = new FoodListItem(i.getName(), 1, i.getPrice());
+                                        itemtable.getItems().add(temp);
+                                    }
+                                    setTotal();
                                 }
-                                if (!found) {
-                                    FoodListItem temp = new FoodListItem(i.getName(), 1, i.getPrice());
-                                    itemtable.getItems().add(temp);
-                                }
-                                setTotal();
-                            }
-                        });
-                        flowtest.getChildren().add(button);
+                            });
+                            flowtest.getChildren().add(button);
+                        }
                     }
                 }
+            });
+            filterlist.getChildren().add(filterButton);
+        }
 
-            }
-        });
-        filterlist.getChildren().add(filterFood);
+
 
         for(FoodItem i : foods){
             Button button = new Button(i.getName());
@@ -237,6 +243,20 @@ public class Controller implements Initializable{
         return filter;
     }
 
+    public void getFilterInput(){
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFiles/filterList.txt"));
+            String line = null;
+            while((line = bufferedReader.readLine())!= null){
+                filters.add(line);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void foodItemInput(){
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFiles/foodList.txt"));
@@ -251,7 +271,6 @@ public class Controller implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void setTableNumber(int tableno){
