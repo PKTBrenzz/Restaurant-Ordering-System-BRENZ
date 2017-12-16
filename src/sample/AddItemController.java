@@ -1,23 +1,39 @@
 package sample;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class AddItemController {
+public class AddItemController implements Initializable {
     @FXML
     TextField field1;
     @FXML
     TextField field2;
+    @FXML
+    TextField idfield;
+    @FXML
+    ComboBox<String> filterbox;
+    @FXML
+    ListView<String> filterlistview;
+
+    List<String> categoryList = new ArrayList<String>();
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initializeFilterBox();
+    }
 
     public void clear() {
-        field1.setText(null);
-        field2.setText(null);
+        field1.clear();
+        field2.clear();
+        filterlistview.getItems().clear();
     }
 
     public void save() throws IOException {
@@ -30,11 +46,10 @@ public class AddItemController {
             FileWriter fw = null;
             try
             {
-                fw = new FileWriter("foodlist.txt",true);
-                fw.write(field1.getText());
-                fw.write(",");
-                fw.write(field2.getText());
-                fw.write("\r\n");
+                fw = new FileWriter("dataFiles/foodList.txt",true);
+                fw.write(idfield.getText() + "," +field1.getText() + "," + field2.getText() + "\n");
+
+
             }
             catch (IOException ex)
             {
@@ -49,7 +64,35 @@ public class AddItemController {
             }
         }
         else {
+        }
+    }
 
+    public void addFoodFilter(){
+        if(!filterlistview.getItems().contains(filterbox.getValue())){
+            if(filterbox.getValue()!= null){
+                filterlistview.getItems().add(filterbox.getValue());
+            }
+        }
+
+    }
+
+    public void deleteFoodFilter(){
+        String deleteItem = filterlistview.getSelectionModel().getSelectedItem();
+        filterlistview.getItems().remove(deleteItem);
+    }
+
+    public void initializeFilterBox(){
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFiles/filterList.txt"));
+            String line = null;
+            while((line = bufferedReader.readLine())!= null){
+                filterbox.getItems().add(line);
+            }
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

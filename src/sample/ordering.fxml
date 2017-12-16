@@ -21,7 +21,7 @@
             <Label text="Filter LIst:" />
             <ScrollPane fitToWidth="true" prefHeight="354.0" prefWidth="245.0">
                <content>
-                  <VBox fx:id="filterlist" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox fx:id="filterlist" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" />
                </content>
             </ScrollPane>
          </children></VBox>
@@ -49,8 +49,8 @@
                   <TextField fx:id="totalfield" editable="false" layoutX="126.0" layoutY="26.0" text="0" />
                   <Button fx:id="checkoutButton" layoutX="148.0" layoutY="138.0" mnemonicParsing="false" onAction="#checkOutExecute" text="Checkout" />
                   <Label layoutX="49.0" layoutY="31.0" text="Total" />
-                  <Label layoutX="49.0" layoutY="90.0" text="Money" />
-                  <TextField layoutX="126.0" layoutY="85.0" />
+                  <Label layoutX="49.0" layoutY="90.0" text="Cash" />
+                  <TextField fx:id="cashAmount" layoutX="126.0" layoutY="85.0" />
                </children>
             </AnchorPane>
          </children>
