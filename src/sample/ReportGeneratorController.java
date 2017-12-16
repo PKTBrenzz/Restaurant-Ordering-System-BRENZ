@@ -25,7 +25,6 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Spinner;
 import javafx.util.Duration;
 
 /**
