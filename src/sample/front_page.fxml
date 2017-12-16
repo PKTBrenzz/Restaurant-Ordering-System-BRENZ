@@ -40,13 +40,22 @@
                      </children></AnchorPane>
             </content>
           </Tab>
+            <Tab text="Report">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="231.0" layoutY="179.0" mnemonicParsing="false" onAction="#startReport" text="Report" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
    </right>
    <center>
       <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <FlowPane fx:id="tableAllList" prefHeight="200.0" prefWidth="200.0" />
+            <FlowPane fx:id="tableAllList" hgap="10.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0" />
          </content>
       </ScrollPane>
    </center>

@@ -50,6 +50,14 @@ public class FrontPageController implements Initializable{
         }
     }
 
+    public void startReport() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ReportGenerator.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
     public void startAddFoodItem() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("add_item.fxml"));
         Stage stage = new Stage();

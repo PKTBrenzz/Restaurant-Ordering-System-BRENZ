@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.*?>
@@ -18,10 +19,13 @@
    <left>
       <VBox prefHeight="700.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Filter LIst:" />
+            <Label text="Filter LIst:">
+               <font>
+                  <Font size="21.0" />
+               </font></Label>
             <ScrollPane fitToWidth="true" prefHeight="354.0" prefWidth="245.0">
                <content>
-                  <VBox fx:id="filterlist" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox fx:id="filterlist" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" />
                </content>
             </ScrollPane>
          </children></VBox>
@@ -69,7 +73,7 @@
    <top>
       <VBox prefHeight="112.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="test" mnemonicParsing="false" onAction="#testpress" text="Button" />
+            <Button fx:id="test" mnemonicParsing="false" onAction="#testpress" text="Back" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Label layoutX="62.0" layoutY="20.0" text="Order No:" />
