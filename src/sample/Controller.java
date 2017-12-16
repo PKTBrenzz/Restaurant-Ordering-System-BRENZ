@@ -119,9 +119,7 @@ public class Controller implements Initializable{
         filterFood.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                List<String> filter = new ArrayList<String>();
-                filter.add("Burger");
-                filter.add("Rice");
+                List<String> filter = getFilterList(filterFood.getText());
 
                 flowtest.getChildren().clear();
                 for(FoodItem i : foods){
@@ -192,6 +190,25 @@ public class Controller implements Initializable{
             total += i.getSubtotal();
         }
         totalfield.setText(new Double(total).toString());
+    }
+
+    public List<String> getFilterList(String text){
+        List<String> filter = new ArrayList<String>();
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("filterList/" +  text + ".txt"));
+            String line = null;
+            while((line = bufferedReader.readLine())!= null){
+                filter.add(line);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return filter;
     }
 
     public void foodItemInput(){
