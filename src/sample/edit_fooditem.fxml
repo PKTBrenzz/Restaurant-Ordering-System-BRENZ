@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EditFoodItemController">
+   <children>
+      <TableView layoutX="356.0" layoutY="74.0" prefHeight="200.0" prefWidth="215.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+            <TableColumn prefWidth="75.0" text="Column X" />
+        </columns>
+      </TableView>
+      <ComboBox layoutX="101.0" layoutY="116.0" prefWidth="150.0" />
+      <Label layoutX="35.0" layoutY="121.0" text="Label" />
+      <Label layoutX="35.0" layoutY="189.0" text="Label" />
+      <TextField layoutX="101.0" layoutY="184.0" />
+      <TextField layoutX="101.0" layoutY="243.0" />
+      <Label layoutX="35.0" layoutY="248.0" text="Label" />
+   </children>
+</AnchorPane>

@@ -1,2 +1,5 @@
 Burger
 Rice
+Chicken
+Hot dog
+French Fries

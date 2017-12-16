@@ -290,6 +290,7 @@ public class Controller implements Initializable{
             while((line = bufferedReader.readLine())!= null){
                 filter.add(line);
             }
+            bufferedReader.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -305,6 +306,7 @@ public class Controller implements Initializable{
             while((line = bufferedReader.readLine())!= null){
                 filters.add(line);
             }
+            bufferedReader.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -314,7 +316,7 @@ public class Controller implements Initializable{
 
     public void foodItemInput(){
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\foodList.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFiles/foodList.txt"));
             String line = null;
             while((line = bufferedReader.readLine())!= null){
                 String[] data = line.split(",");
