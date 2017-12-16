@@ -213,7 +213,7 @@ public class Controller implements Initializable{
 
     public void foodItemInput(){
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFiles/foodList.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\foodList.txt"));
             String line = null;
             while((line = bufferedReader.readLine())!= null){
                 String[] data = line.split(",");
