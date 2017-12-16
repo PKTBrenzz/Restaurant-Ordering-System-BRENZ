@@ -10,9 +10,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainMenuController {
+
+
     public void startOrder(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ordering.fxml"));
+        Parent root = (Parent) loader.load();
         Stage stage = (Stage) ((Node)event.getSource() ).getScene().getWindow();
+        Controller controller = loader.getController();
+        controller.setTableNumber(10);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

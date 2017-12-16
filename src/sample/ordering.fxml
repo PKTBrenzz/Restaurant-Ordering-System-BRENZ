@@ -18,6 +18,7 @@
    <left>
       <VBox prefHeight="700.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
+            <Label text="Filter LIst:" />
             <ScrollPane fitToWidth="true" prefHeight="354.0" prefWidth="245.0">
                <content>
                   <VBox fx:id="filterlist" prefHeight="200.0" prefWidth="100.0" />
@@ -46,7 +47,7 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <TextField fx:id="totalfield" editable="false" layoutX="126.0" layoutY="26.0" text="0" />
-                  <Button fx:id="checkoutButton" layoutX="148.0" layoutY="138.0" mnemonicParsing="false" text="Checkout" />
+                  <Button fx:id="checkoutButton" layoutX="148.0" layoutY="138.0" mnemonicParsing="false" onAction="#checkOutExecute" text="Checkout" />
                   <Label layoutX="49.0" layoutY="31.0" text="Total" />
                   <Label layoutX="49.0" layoutY="90.0" text="Money" />
                   <TextField layoutX="126.0" layoutY="85.0" />
@@ -73,6 +74,7 @@
                <children>
                   <Label layoutX="62.0" layoutY="20.0" text="Order No:" />
                   <Label layoutX="63.0" layoutY="41.0" text="Table No:" />
+                  <Label fx:id="tableNumber" layoutX="138.0" layoutY="41.0" text="0000" />
                </children>
             </AnchorPane>
          </children>
@@ -81,7 +83,7 @@
    <bottom>
       <AnchorPane prefHeight="46.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="1079.0" layoutY="13.0" text="Label" />
+            <Label fx:id="errorlabel" layoutX="1079.0" layoutY="13.0" text="Label" />
          </children>
       </AnchorPane>
    </bottom>

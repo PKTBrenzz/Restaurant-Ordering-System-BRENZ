@@ -10,21 +10,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -49,7 +46,10 @@ public class Controller implements Initializable{
     Button checkoutButton;
     @FXML
     Button test;
-
+    @FXML
+    Label tableNumber;
+    @FXML
+            Label errorlabel;
 
     List<FoodItem> foods = new ArrayList<FoodItem>();
     ObservableList<FoodListItem> list = FXCollections.observableArrayList();
@@ -59,6 +59,35 @@ public class Controller implements Initializable{
         FoodListItem deleteItem = itemtable.getSelectionModel().getSelectedItem();
         itemtable.getItems().remove(deleteItem);
         setTotal();
+    }
+
+    public void checkOutExecute(){
+        try {
+            boolean comfirm = false;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("summary.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(loader.load(), 350, 600);
+            Summary summary = loader.getController();
+            summary.setSummarytext(itemtable.getItems());
+            stage.setTitle("Summary");
+            stage.setScene(scene);
+            stage.showAndWait();
+            comfirm = summary.getComfirmation();
+            if(comfirm){
+                errorlabel.setText("true");
+                Date date = new Date();
+
+                OrderItem newOrder = new OrderItem(1,1, date,5);
+
+                FileOutputStream fos = new FileOutputStream("OrderHistory/currentOrder.txt");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(newOrder);
+                oos.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -154,8 +183,6 @@ public class Controller implements Initializable{
         });
         filterlist.getChildren().add(filterFood);
 
-
-
         for(FoodItem i : foods){
             Button button = new Button(i.getName());
             button.setPrefSize(100,100);
@@ -181,6 +208,7 @@ public class Controller implements Initializable{
             });
             flowtest.getChildren().add(button);
         }
+
     }
 
     public void setTotal(){
@@ -206,8 +234,6 @@ public class Controller implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         return filter;
     }
 
@@ -225,5 +251,10 @@ public class Controller implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public void setTableNumber(int tableno){
+        tableNumber.setText(new Integer(tableno).toString());
     }
 }

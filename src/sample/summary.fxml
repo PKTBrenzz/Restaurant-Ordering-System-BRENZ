@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Summary">
+   <children>
+      <TextArea fx:id="summarytext" layoutX="16.0" layoutY="17.0" prefHeight="439.0" prefWidth="319.0" />
+      <Label layoutX="63.0" layoutY="476.0" text="Comfirm the order and Chekcout?" textAlignment="CENTER" />
+      <Button fx:id="comfirmbutton" layoutX="55.0" layoutY="521.0" mnemonicParsing="false" onAction="#comfirmPressed" prefWidth="80.0" text="Comfirm" />
+      <Button fx:id="cancelbutton" layoutX="210.0" layoutY="521.0" mnemonicParsing="false" onAction="#cancelPressed" prefWidth="80.0" text="Cancel" />
+   </children>
+</AnchorPane>
