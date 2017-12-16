@@ -24,6 +24,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Spinner;
 import javafx.util.Duration;
 
@@ -35,15 +36,7 @@ import javafx.util.Duration;
 public class ReportGeneratorController implements Initializable {
 
     @FXML
-    private ChoiceBox<?> yearCombo;
-    @FXML
-    private ChoiceBox<?> monthCombo;
-    @FXML
-    private ChoiceBox<?> dateCombo;
-    @FXML
     private ChoiceBox<?> comparisonCombo;
-    @FXML
-    private Spinner<?> spinner;
     @FXML
     private PieChart pieChart;
     @FXML
@@ -54,6 +47,8 @@ public class ReportGeneratorController implements Initializable {
     private NumberAxis yAxis;
     @FXML
     private CategoryAxis xAxis;
+    @FXML
+    private DatePicker datePicker;
 
     /**
      * Initializes the controller class.
