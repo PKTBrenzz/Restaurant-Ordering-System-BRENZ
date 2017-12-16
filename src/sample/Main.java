@@ -10,7 +10,7 @@ public class Main extends Application {
     //PKT HERE
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("main_menu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("front_page.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 1280, 800));
         primaryStage.show();

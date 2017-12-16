@@ -51,11 +51,11 @@ public class AddItemController implements Initializable {
             try
             {
                 fw = new FileWriter("dataFiles/foodList.txt",true);
-                fw.write(idfield.getText() + "," +field1.getText() + "," + field2.getText() + "\n");
+                fw.write(idfield.getText() + "," +field1.getText() + "," + field2.getText() + "\r\n");
 
                 for(String i : filterlistview.getItems()){
                     FileWriter ffw = new FileWriter("filterList/" + i + ".txt", true);
-                    ffw.write(field1.getText() + "\n");
+                    ffw.write(field1.getText() + "\r\n");
                     ffw.close();
                 }
 
