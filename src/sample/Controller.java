@@ -65,10 +65,14 @@ public class Controller implements Initializable{
     }
 
     public void checkOutExecute(){
-        if(Double.parseDouble(totalfield.getText()) > Double.parseDouble(cashAmount.getText())){
+        
+        if(cashAmount.getText().equals("")){
+            errorlabel.setText("Please insert cash");
+        }
+        else if(Double.parseDouble(totalfield.getText()) > Double.parseDouble(cashAmount.getText())){
             errorlabel.setText("ERROR!!! Cash inserted is not enough!");
         }
-        else {
+        else 
             try {
                 boolean comfirm = false;
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("summary.fxml"));
@@ -82,17 +86,68 @@ public class Controller implements Initializable{
                 comfirm = summary.getComfirmation();
                 if (comfirm) {
                     errorlabel.setText("true");
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = new Date();
+                    
+                    BufferedReader readEnd = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\Log-"+dateFormat.format(date)+".txt"));
+                    BufferedWriter writeEnd = new BufferedWriter(new FileWriter("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\Log-"+dateFormat.format(date)+".txt"));
+                    
+                    
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-
     }
 
 
     public void testpress(ActionEvent event) throws IOException {
 
+        BufferedReader read = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\metadata.txt"));
+        BufferedWriter write = new BufferedWriter(new FileWriter("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\metadataTemp.txt"));
+        boolean found = false;
+        String line;
+        while((line = read.readLine()) != null){
+            if(line.trim().isEmpty()) {
+                continue;
+            }
+            else if(line.equals("Table " + tableNumber.getText())){
+                write.write("Table " + tableNumber.getText().toString() + "\n");
+                for(FoodListItem i : itemtable.getItems()){
+                    write.write(new Integer(i.getQuantity()).toString() + " x " + i.getName() + " = " + new Double(i.getSubtotal()).toString() + "\n");
+                    System.out.println(line);
+                }
+                found = true;
+            }
+            else if(line != null && found == false){
+                write.write(line + "\n");System.out.println(line);
+            }
+            else if(line != null){
+                if(line.equals("Table.*")){
+                    found = false;
+                    write.write(line + "\n");System.out.println(line);
+                }
+            }
+        }
+        read.close();
+        write.close();
+        
+        BufferedReader readEnd = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\metadataTemp.txt"));
+        BufferedWriter writeEnd = new BufferedWriter(new FileWriter("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\metadata.txt"));
+        
+        while((line = readEnd.readLine()) != null){
+            if(line.trim().isEmpty()) {
+                System.out.println("space");
+                continue;
+            }
+            else{
+                writeEnd.write(line + "\r\n");
+            }
+            
+        }
+           
+        readEnd.close();
+        writeEnd.close();
+        
         Parent root = FXMLLoader.load(getClass().getResource("main_menu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource() ).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -245,7 +300,7 @@ public class Controller implements Initializable{
 
     public void getFilterInput(){
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFiles/filterList.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\filterList.txt"));
             String line = null;
             while((line = bufferedReader.readLine())!= null){
                 filters.add(line);
