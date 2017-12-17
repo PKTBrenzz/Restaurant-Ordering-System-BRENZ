@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EditFoodItemController">
+<AnchorPane prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EditFoodItemController">
    <children>
-      <TableView layoutX="356.0" layoutY="74.0" prefHeight="200.0" prefWidth="215.0">
+      <TableView fx:id="foodTable" layoutX="29.0" layoutY="60.0" prefHeight="168.0" prefWidth="593.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="Column X" />
+          <TableColumn fx:id="foodID" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="foodName" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="foodPrice" prefWidth="75.0" text="Price" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
-      <ComboBox layoutX="101.0" layoutY="116.0" prefWidth="150.0" />
-      <Label layoutX="35.0" layoutY="121.0" text="Label" />
-      <Label layoutX="35.0" layoutY="189.0" text="Label" />
-      <TextField layoutX="101.0" layoutY="184.0" />
-      <TextField layoutX="101.0" layoutY="243.0" />
-      <Label layoutX="35.0" layoutY="248.0" text="Label" />
+      <Label layoutX="179.0" layoutY="317.0" text="ID:" />
+      <Label layoutX="179.0" layoutY="369.0" text="Name:" />
+      <TextField fx:id="namefield" layoutX="245.0" layoutY="364.0" />
+      <TextField fx:id="pricefield" layoutX="245.0" layoutY="423.0" />
+      <Label layoutX="179.0" layoutY="428.0" text="Price:" />
+      <TextField fx:id="idField" editable="false" layoutX="245.0" layoutY="312.0" />
+      <Button layoutX="154.0" layoutY="244.0" mnemonicParsing="false" onAction="#selectOneItem" prefWidth="75.0" text="SELECT" />
+      <Button layoutX="494.0" layoutY="364.0" mnemonicParsing="false" onAction="#editExecute" text="EDIT" />
+      <Button layoutX="413.0" layoutY="244.0" mnemonicParsing="false" onAction="#deleteExecute" prefWidth="125.0" text="DELETE ITEM" />
+      <Button layoutX="295.0" layoutY="476.0" mnemonicParsing="false" onAction="#confirmChange" text="COMFIRM" />
+      <Button layoutX="293.0" layoutY="244.0" mnemonicParsing="false" onAction="#resetList" prefWidth="75.0" text="RESET" />
+      <Label fx:id="errorlabel" layoutX="29.0" layoutY="507.0" textFill="RED" />
+      <Label layoutX="265.0" layoutY="22.0" text="Edit food item:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -48,7 +48,7 @@ public class FilterAddController implements Initializable{
         else{
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
-            alert.setContentText("Are you sure this item want to add to the food list?");
+            alert.setContentText("Are you sure, that you want to add this filter?");
             Optional<ButtonType> result = alert.showAndWait();
             if(result.get() == ButtonType.OK){
                 try {

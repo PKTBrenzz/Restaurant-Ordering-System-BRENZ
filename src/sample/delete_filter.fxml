@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="504.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DeleteFilterController">
+   <children>
+      <ListView fx:id="allFilterList" layoutX="69.0" layoutY="74.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="340.0" layoutY="116.0" mnemonicParsing="false" onAction="#deleteSelectedItem" text="DELETE" />
+      <Button layoutX="217.0" layoutY="312.0" mnemonicParsing="false" onAction="#confirmDeletion" text="CONFIRM" />
+      <Label layoutX="69.0" layoutY="39.0" text="Filter List:" />
+      <Button layoutX="342.0" layoutY="185.0" mnemonicParsing="false" onAction="#resetList" text="RESET" />
+   </children>
+</AnchorPane>

@@ -191,9 +191,10 @@ public class ReportGeneratorController implements Initializable {
     public XYChart.Data generate(Date date) {
         XYChart.Data data = new XYChart.Data();
         BufferedReader read = null;
+        System.out.print(date);
         
         try {
-            read = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\Log-" + date.toString() + ".txt"));
+            read = new BufferedReader(new FileReader("log/Log-" + date.toString() + ".txt"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ReportGeneratorController.class.getName()).log(Level.SEVERE, null, ex);
         }
