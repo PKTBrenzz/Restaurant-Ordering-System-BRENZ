@@ -78,7 +78,6 @@ public class ReportGeneratorController implements Initializable {
 
         comparison.setValue("Money");
         
-        datePicker.
 
         XYChart.Series<String, Number> asd = new XYChart.Series<String, Number>();
         
