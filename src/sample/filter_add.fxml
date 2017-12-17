@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 
 <AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FilterAddController">
    <children>
@@ -13,7 +13,10 @@
       <TextField fx:id="filterName" layoutX="240.0" layoutY="94.0" />
       <ListView fx:id="newListFilter" layoutX="52.0" layoutY="194.0" prefHeight="124.0" prefWidth="200.0" />
       <ListView fx:id="allListFilter" layoutX="346.0" layoutY="194.0" prefHeight="124.0" prefWidth="200.0" />
-      <Label layoutX="268.0" layoutY="36.0" text="Add Filter" />
+      <Label layoutX="249.0" layoutY="36.0" text="Add Filter">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
       <Button layoutX="257.0" layoutY="404.0" mnemonicParsing="false" onAction="#addFilter" text="COMFIRM" />
       <Button layoutX="74.0" layoutY="339.0" mnemonicParsing="false" onAction="#deleteFilterFood" text="Delete selected food" />
       <Button layoutX="362.0" layoutY="339.0" mnemonicParsing="false" onAction="#addFilterFood" text="Add Food to new filter" />

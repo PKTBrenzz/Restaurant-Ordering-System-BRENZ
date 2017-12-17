@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -14,18 +15,19 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="27.0" layoutY="14.0" prefHeight="313.0" prefWidth="473.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                              <TableColumn prefWidth="75.0" text="Column X" />
-                              <TableColumn prefWidth="75.0" text="Column X" />
-                              <TableColumn prefWidth="75.0" text="Column X" />
-                          </columns>
-                        </TableView>
-                        <Button layoutX="231.0" layoutY="489.0" mnemonicParsing="false" text="Order" />
-                        <TextField layoutX="170.0" layoutY="436.0" />
-                        <Button layoutX="418.0" layoutY="342.0" mnemonicParsing="false" text="Button" />
+                        <Label layoutX="106.0" layoutY="51.0" text="Welcome to the Restaurant Ordering System" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="138.0" layoutY="91.0" text="Choose any table to start taking order" textAlignment="CENTER" />
+                        <Label layoutX="96.0" layoutY="372.0" text="If you wish to change amount of tables in the list" />
+                        <Label layoutX="110.0" layoutY="399.0" text="Simple change the number of table at below" />
+                        <TextField fx:id="tableNumberEdit" layoutX="164.0" layoutY="434.0" />
+                        <Button layoutX="218.0" layoutY="490.0" mnemonicParsing="false" onAction="#changeTable" text="CHANGE" />
+                        <Button layoutX="220.0" layoutY="251.0" mnemonicParsing="false" onAction="#startReport" prefHeight="50.0" prefWidth="75.0" text="Report" />
+                        <Label layoutX="112.0" layoutY="186.0" text="To review the performance in the restaurant" />
+                        <Label layoutX="129.0" layoutY="216.0" text="Button below here will show the report" />
                      </children>
                   </AnchorPane>
             </content>
@@ -34,35 +36,43 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="64.0" layoutY="147.0" mnemonicParsing="false" onAction="#startAddFoodItem" text="Add Food Item" />
-                        <Button layoutX="294.0" layoutY="147.0" mnemonicParsing="false" text="Modify Food Item List" />
-                        <Button layoutX="67.0" layoutY="371.0" mnemonicParsing="false" onAction="#startAddFilter" text="Add new filter" />
+                        <Button layoutX="67.0" layoutY="64.0" mnemonicParsing="false" onAction="#startAddFoodItem" prefHeight="150.0" prefWidth="150.0" text="Add Food Item" />
+                        <Button layoutX="294.0" layoutY="64.0" mnemonicParsing="false" onAction="#startModifyFoodItem" prefHeight="150.0" prefWidth="150.0" text="Modify Food Item List" textAlignment="CENTER" wrapText="true" />
+                        <Button layoutX="67.0" layoutY="308.0" mnemonicParsing="false" onAction="#startAddFilter" prefHeight="75.0" prefWidth="150.0" text="Add new filter" />
+                        <Button layoutX="294.0" layoutY="308.0" mnemonicParsing="false" onAction="#startDeleteFilter" prefHeight="75.0" prefWidth="150.0" text="Delete Filter" />
+                        <Button layoutX="189.0" layoutY="390.0" mnemonicParsing="false" onAction="#startEditFilter" prefHeight="75.0" prefWidth="150.0" text="Edit Filter" />
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Report">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="231.0" layoutY="179.0" mnemonicParsing="false" onAction="#startReport" text="Report" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
         </tabs>
       </TabPane>
    </right>
-   <center>
-      <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <content>
-            <FlowPane fx:id="tableAllList" hgap="10.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0" />
-         </content>
-      </ScrollPane>
-   </center>
    <bottom>
-      <AnchorPane prefHeight="68.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="68.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="errorlabel" layoutX="759.0" layoutY="24.0" textFill="RED" />
+         </children></AnchorPane>
    </bottom>
    <top>
-      <AnchorPane prefHeight="92.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="92.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="268.0" layoutY="3.0" prefHeight="76.0" prefWidth="744.0" text="Restaurant Ordering System">
+               <font>
+                  <Font size="60.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
    </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane fitToWidth="true" layoutX="6.0" layoutY="59.0" prefHeight="575.0" prefWidth="738.0">
+               <content>
+                  <FlowPane fx:id="tableAllList" hgap="10.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0" />
+               </content>
+            </ScrollPane>
+            <Label layoutX="28.0" layoutY="24.0" text="Table List:" />
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>

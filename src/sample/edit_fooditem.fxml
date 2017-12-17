@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -24,9 +25,16 @@
       <TextField fx:id="pricefield" layoutX="245.0" layoutY="423.0" />
       <Label layoutX="179.0" layoutY="428.0" text="Price:" />
       <TextField fx:id="idField" editable="false" layoutX="245.0" layoutY="312.0" />
-      <Button layoutX="154.0" layoutY="244.0" mnemonicParsing="false" onAction="#selectOneItem" text="SELECT" />
-      <Button layoutX="301.0" layoutY="244.0" mnemonicParsing="false" onAction="#editExecute" text="EDIT" />
-      <Button layoutX="413.0" layoutY="244.0" mnemonicParsing="false" onAction="#deleteExecute" text="DELETE ITEM" />
-      <Button layoutX="295.0" layoutY="485.0" mnemonicParsing="false" onAction="#confirmChange" text="COMFIRM" />
+      <Button layoutX="154.0" layoutY="244.0" mnemonicParsing="false" onAction="#selectOneItem" prefWidth="75.0" text="SELECT" />
+      <Button layoutX="494.0" layoutY="364.0" mnemonicParsing="false" onAction="#editExecute" text="EDIT" />
+      <Button layoutX="413.0" layoutY="244.0" mnemonicParsing="false" onAction="#deleteExecute" prefWidth="125.0" text="DELETE ITEM" />
+      <Button layoutX="295.0" layoutY="476.0" mnemonicParsing="false" onAction="#confirmChange" text="COMFIRM" />
+      <Button layoutX="293.0" layoutY="244.0" mnemonicParsing="false" onAction="#resetList" prefWidth="75.0" text="RESET" />
+      <Label fx:id="errorlabel" layoutX="29.0" layoutY="507.0" textFill="RED" />
+      <Label layoutX="265.0" layoutY="22.0" text="Edit food item:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

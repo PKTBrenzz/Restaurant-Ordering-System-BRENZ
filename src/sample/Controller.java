@@ -90,7 +90,7 @@ public class Controller implements Initializable {
                     errorlabel.setText("true");
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date();
-                    File yourFile = new File("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\Log-" + dateFormat.format(date) + ".txt");
+                    File yourFile = new File("log/Log-" + dateFormat.format(date) + ".txt");
                     yourFile.createNewFile();
                     BufferedReader readEnd = new BufferedReader(new FileReader(yourFile.getAbsolutePath()));
                     String everything;
@@ -179,8 +179,8 @@ public class Controller implements Initializable {
 
     public void testpress(ActionEvent event) throws IOException {
 
-        BufferedReader read = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\metadata.txt"));
-        BufferedWriter write = new BufferedWriter(new FileWriter("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\metadataTemp.txt"));
+        BufferedReader read = new BufferedReader(new FileReader("metadata.txt"));
+        BufferedWriter write = new BufferedWriter(new FileWriter("metadataTemp.txt"));
         boolean found = false;
         String line;
         while ((line = read.readLine()) != null) {
@@ -205,8 +205,8 @@ public class Controller implements Initializable {
         read.close();
         write.close();
 
-        BufferedReader readEnd = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\metadataTemp.txt"));
-        BufferedWriter writeEnd = new BufferedWriter(new FileWriter("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\metadata.txt"));
+        BufferedReader readEnd = new BufferedReader(new FileReader("metadataTemp.txt"));
+        BufferedWriter writeEnd = new BufferedWriter(new FileWriter("metadata.txt"));
 
         while ((line = readEnd.readLine()) != null) {
             if (line.trim().isEmpty()) {
@@ -358,7 +358,7 @@ public class Controller implements Initializable {
         List<String> filter = new ArrayList<String>();
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\" + text + ".txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("filterList/" + text + ".txt"));
             String line = null;
             while ((line = bufferedReader.readLine()) != null) {
                 filter.add(line);
@@ -374,7 +374,7 @@ public class Controller implements Initializable {
 
     public void getFilterInput() {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\filterList.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFiles/filterList.txt"));
             String line = null;
             while ((line = bufferedReader.readLine()) != null) {
                 filters.add(line);
@@ -389,7 +389,7 @@ public class Controller implements Initializable {
 
     public void foodItemInput() {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\foodList.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFiles/foodList.txt"));
             String line = null;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] data = line.split(",");
@@ -407,13 +407,13 @@ public class Controller implements Initializable {
         tableNum = tableno;
         BufferedReader read = null;
         try {
-            read = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\metadata.txt"));
+            read = new BufferedReader(new FileReader("metadata.txt"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         BufferedWriter write = null;
         try {
-            write = new BufferedWriter(new FileWriter("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\metadataTemp.txt"));
+            write = new BufferedWriter(new FileWriter("metadataTemp.txt"));
         } catch (IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -477,13 +477,13 @@ public class Controller implements Initializable {
 
         BufferedReader readEnd = null;
         try {
-            readEnd = new BufferedReader(new FileReader("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\metadataTemp.txt"));
+            readEnd = new BufferedReader(new FileReader("metadataTemp.txt"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         BufferedWriter writeEnd = null;
         try {
-            writeEnd = new BufferedWriter(new FileWriter("C:\\Users\\vegeg\\Documents\\NetBeansProjects\\Restaurant-Ordering-System-BRENZ\\src\\sample\\metadata.txt"));
+            writeEnd = new BufferedWriter(new FileWriter("metadata.txt"));
         } catch (IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }

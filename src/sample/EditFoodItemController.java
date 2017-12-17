@@ -31,6 +31,8 @@ public class EditFoodItemController implements Initializable {
     TableColumn foodName;
     @FXML
     TableColumn foodPrice;
+    @FXML
+    Label errorlabel;
 
     List<FoodItem> foods = new ArrayList<FoodItem>();
     String oldId;
@@ -65,16 +67,23 @@ public class EditFoodItemController implements Initializable {
 
     public void editExecute() throws IOException {
         if(!isDouble(pricefield.getText())){
-
+            errorlabel.setText("Error!");
         }
         else{
             for(FoodItem i : foodTable.getItems()){
-                if(oldId.equals(i.getId())){
+                if(oldId == i.getId()){
                     i.setName(oldName);
                     i.setPrice(oldPrice);
                     foodTable.refresh();
                 }
             }
+        }
+    }
+
+    public void resetList(){
+        foodTable.getItems().clear();
+        for(FoodItem i : foods){
+            foodTable.getItems().add(i);
         }
     }
 
