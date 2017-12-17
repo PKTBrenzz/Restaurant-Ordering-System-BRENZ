@@ -5,7 +5,6 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -18,12 +17,12 @@
    <children>
       <Pane layoutX="917.0" layoutY="208.0" prefHeight="307.0" prefWidth="282.0">
          <children>
-            <ChoiceBox id="comparisonSelect" fx:id="comparisonCombo" layoutX="50.0" layoutY="248.0" prefWidth="150.0" />
-            <Label layoutX="50.0" layoutY="227.0" text="Comparison:" />
+            <Label layoutX="50.0" layoutY="227.0" text="Comparison day:" />
             <DatePicker fx:id="datePicker" layoutX="24.0" layoutY="164.0" />
             <Label layoutX="81.0" layoutY="135.0" text="Pick a date:" />
             <Label layoutX="52.0" layoutY="21.0" text="Select comparison type:" />
             <ComboBox fx:id="comparison" layoutX="62.0" layoutY="60.0" prefWidth="150.0" />
+            <ComboBox fx:id="comparisonCombo" layoutX="43.0" layoutY="248.0" prefWidth="150.0" />
          </children>
       </Pane>
       <TabPane layoutY="119.0" prefHeight="681.0" prefWidth="882.0" tabClosingPolicy="UNAVAILABLE">
