@@ -44,9 +44,8 @@ public class Summary implements Initializable {
     public void setSummarytext(ObservableList<FoodListItem> finalizedItems){
         summarytext.appendText("Restaurant\n");
         for(FoodListItem i : finalizedItems){
-            summarytext.appendText(new Integer(i.getQuantity()).toString() + i.getName() + new Double(i.getSubtotal()).toString() + "\n");
+            summarytext.appendText(new Integer(i.getQuantity()).toString() + " x " + i.getName() + " = " + new Double(i.getSubtotal()).toString() + "\n");
         }
-        summarytext.appendText("\nTotal: " + new Double(getTotal(finalizedItems)).toString());
     }
 
     public double getTotal(ObservableList<FoodListItem> finalizedItems){
